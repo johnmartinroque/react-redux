@@ -3,6 +3,7 @@ import ChangeColor from "./components/ChangeColor";
 import Counter from "./components/Counter";
 import Login from "./components/Login";
 import Profile from "./components/Profile";
+import Todo from "./components/Todo";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Login />
       <ChangeColor />
       <Counter />
+      <Todo />
     </div>
   );
 }
