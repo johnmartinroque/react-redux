@@ -33,6 +33,7 @@ function Input() {
           </div>
         ))}
       </h2>
+      <h2>Second to the last input: {names[names.length - 2]}</h2>
     </div>
   );
 }
