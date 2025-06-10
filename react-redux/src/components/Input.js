@@ -4,6 +4,7 @@ function Input() {
   const [names, setNames] = useState([]);
   const [input, setInput] = useState("");
   const [removed, setRemoved] = useState("");
+  const [deletedItems, setDeletedItems] = useState([]);
 
   const nameHandler = () => {
     if (input.trim()) {
@@ -13,7 +14,9 @@ function Input() {
   };
 
   const removeHandler = (index) => {
-    const removed = setRemoved(names[index]);
+    const nameToRemove = names[index];
+    setRemoved(nameToRemove);
+    setDeletedItems((prev) => [...prev, nameToRemove]);
     const updateNames = names.filter((_, i) => i !== index);
     setNames(updateNames);
   };
@@ -38,6 +41,12 @@ function Input() {
             {name}
             <button onClick={() => removeHandler(index)}>remove</button>
           </div>
+        ))}
+      </h2>
+      <h2>
+        Deleted NAMES:{" "}
+        {deletedItems.map((deleted, index) => (
+          <div key={index}>{deleted}</div>
         ))}
       </h2>
       <h1>Last removed: {removed}</h1>
