@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 function Input() {
   const [names, setNames] = useState([]);
   const [input, setInput] = useState("");
+  const [removed, setRemoved] = useState("");
 
   const nameHandler = () => {
     if (input.trim()) {
@@ -12,9 +13,11 @@ function Input() {
   };
 
   const removeHandler = (index) => {
+    const removed = setRemoved(names[index]);
     const updateNames = names.filter((_, i) => i !== index);
     setNames(updateNames);
   };
+
   return (
     <div style={{ backgroundColor: "blue" }}>
       <input
@@ -33,6 +36,7 @@ function Input() {
           </div>
         ))}
       </h2>
+      <h1>Last removed: {removed}</h1>
       <h2>Second to the last input: {names[names.length - 2]}</h2>
     </div>
   );
