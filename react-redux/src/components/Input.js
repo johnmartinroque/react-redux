@@ -18,6 +18,10 @@ function Input() {
     setNames(updateNames);
   };
 
+  useEffect(() => {
+    setNames(["John", "Martin", "Roque", "ABC"]);
+  }, []);
+
   return (
     <div style={{ backgroundColor: "blue" }}>
       <input
