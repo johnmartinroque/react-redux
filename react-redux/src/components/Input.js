@@ -5,10 +5,15 @@ function Input() {
   const [input, setInput] = useState("");
 
   const nameHandler = () => {
-    setNames([...names, input]);
-    setInput("");
-    console.log(input);
-    console.log(names);
+    if (input.trim()) {
+      setNames([...names, input]);
+      setInput("");
+    }
+  };
+
+  const removeHandler = (index) => {
+    const updateNames = names.filter((_, i) => i !== index);
+    setNames(updateNames);
   };
   return (
     <div style={{ backgroundColor: "blue" }}>
@@ -22,7 +27,10 @@ function Input() {
       </button>
       <h2>
         {names.map((name, index) => (
-          <div key={index}>{name}</div>
+          <div key={index}>
+            {name}
+            <button onClick={() => removeHandler(index)}>remove</button>
+          </div>
         ))}
       </h2>
     </div>
