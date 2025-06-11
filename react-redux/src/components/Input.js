@@ -51,6 +51,7 @@ function Input() {
       </h2>
       <h1>Last removed: {removed}</h1>
       <h2>Second to the last input: {names[names.length - 2]}</h2>
+      <h2>Third to the last input: : {names[names.length - 3]}</h2>
     </div>
   );
 }
