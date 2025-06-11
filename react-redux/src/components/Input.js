@@ -5,6 +5,8 @@ function Input() {
   const [input, setInput] = useState("");
   const [removed, setRemoved] = useState("");
   const [deletedItems, setDeletedItems] = useState([]);
+  const [editedIndex, setEditedIndex] = useState(null);
+  const [editedName, setEditedName] = useState("");
 
   const nameHandler = () => {
     if (input.trim()) {
@@ -21,37 +23,64 @@ function Input() {
     setNames(updateNames);
   };
 
+  const startEditing = (index) => {
+    setEditedIndex(index);
+    setEditedName(names[index]);
+  };
+
+  const saveEdit = (index) => {
+    const updatedNames = [...names];
+    updatedNames[index] = editedName;
+    setNames(updatedNames);
+    setEditedIndex(null);
+    setEditedName("");
+  };
+
   useEffect(() => {
     setNames(["John", "Martin", "Roque", "ABC"]);
   }, []);
 
   return (
-    <div style={{ backgroundColor: "blue" }}>
+    <div style={{ backgroundColor: "blue", padding: "20px", color: "white" }}>
       <input
         type="text"
         value={input}
         onChange={(e) => setInput(e.target.value)}
       />
-      <button onClick={nameHandler} type="submit">
-        submit
-      </button>
+      <button onClick={nameHandler}>Submit</button>
+
       <h2>
         {names.map((name, index) => (
           <div key={index}>
-            {name}
-            <button onClick={() => removeHandler(index)}>remove</button>
+            {editedIndex === index ? (
+              <>
+                <input
+                  type="text"
+                  value={editedName}
+                  onChange={(e) => setEditedName(e.target.value)}
+                />
+                <button onClick={() => saveEdit(index)}>Save</button>
+              </>
+            ) : (
+              <>
+                {name} <button onClick={() => startEditing(index)}>Edit</button>
+              </>
+            )}
+            <button onClick={() => removeHandler(index)}>Remove</button>
           </div>
         ))}
       </h2>
+
       <h2>
-        Deleted NAMES:{" "}
+        Deleted NAMES:
         {deletedItems.map((deleted, index) => (
           <div key={index}>{deleted}</div>
         ))}
       </h2>
+
       <h1>Last removed: {removed}</h1>
       <h2>Second to the last input: {names[names.length - 2]}</h2>
-      <h2>Third to the last input: : {names[names.length - 3]}</h2>
+      <h2>Third to the last input: {names[names.length - 3]}</h2>
     </div>
   );
 }
