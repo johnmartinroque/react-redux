@@ -36,6 +36,11 @@ function Input() {
     setEditedName("");
   };
 
+  const reverse = () => {
+    const reversedNames = names.slice().reverse();
+    setNames(reversedNames);
+  };
+
   useEffect(() => {
     setNames(["John", "Martin", "Roque", "ABC"]);
   }, []);
@@ -50,6 +55,7 @@ function Input() {
       <button onClick={nameHandler}>Submit</button>
 
       <h2>
+        NAMES:
         {names.map((name, index) => (
           <div key={index}>
             {editedIndex === index ? (
@@ -81,6 +87,7 @@ function Input() {
       <h1>Last removed: {removed}</h1>
       <h2>Second to the last input: {names[names.length - 2]}</h2>
       <h2>Third to the last input: {names[names.length - 3]}</h2>
+      <button onClick={reverse}>Reverse</button>
     </div>
   );
 }
