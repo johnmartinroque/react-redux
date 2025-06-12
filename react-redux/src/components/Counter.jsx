@@ -22,6 +22,7 @@ function Counter() {
 
   const updateCount = () => {
     setCount(choice);
+    setChoice("");
   };
 
   return (
