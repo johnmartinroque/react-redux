@@ -7,6 +7,7 @@ function Input() {
   const [deletedItems, setDeletedItems] = useState([]);
   const [editedIndex, setEditedIndex] = useState(null);
   const [editedName, setEditedName] = useState("");
+  const [firstLetters, setFirstLetters] = useState([]);
 
   const nameHandler = () => {
     if (input.trim()) {
@@ -41,6 +42,8 @@ function Input() {
     setNames(reversedNames);
   };
 
+  const firstLettersHandler = () => {};
+
   useEffect(() => {
     setNames(["John", "Martin", "Roque", "ABC"]);
   }, []);
@@ -69,7 +72,16 @@ function Input() {
               </>
             ) : (
               <>
-                {name} <button onClick={() => startEditing(index)}>Edit</button>
+                {name}
+                <h1>
+                  {name.charAt(0).toLowerCase() === "j"
+                    ? "starts with j"
+                    : name.charAt(0).toLowerCase() === "m"
+                    ? "starts with m"
+                    : "others"}
+                </h1>
+
+                <button onClick={() => startEditing(index)}>Edit</button>
               </>
             )}
             <button onClick={() => removeHandler(index)}>Remove</button>
@@ -88,6 +100,7 @@ function Input() {
       <h2>Second to the last input: {names[names.length - 2]}</h2>
       <h2>Third to the last input: {names[names.length - 3]}</h2>
       <button onClick={reverse}>Reverse</button>
+      <h2></h2>
     </div>
   );
 }
