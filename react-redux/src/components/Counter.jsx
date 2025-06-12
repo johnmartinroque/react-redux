@@ -3,25 +3,32 @@ import React, { useEffect, useState } from "react";
 function Counter() {
   const [count, setCount] = useState();
   const [choice, setChoice] = useState();
+  const [prevCount, setPrevCount] = useState(null);
 
   useEffect(() => {
     setCount(0);
   }, []);
 
   const minusCount = () => {
+    setPrevCount(count);
     setCount(count - 1);
   };
 
   const addCount = () => {
+    setPrevCount(count);
     setCount(count + 1);
   };
 
   const resetCount = () => {
+    setPrevCount(count);
     setCount(0);
   };
-
   const updateCount = () => {
-    setCount(choice);
+    const intChoice = parseInt(choice, 10);
+    if (!isNaN(intChoice)) {
+      setPrevCount(count);
+      setCount(intChoice);
+    }
     setChoice("");
   };
 
@@ -37,6 +44,7 @@ function Counter() {
         onChange={(e) => setChoice(e.target.value)}
       />
       <button onClick={updateCount}>SUBMIT</button>
+      {prevCount !== null && <h1>Previous Count: {prevCount}</h1>}
     </div>
   );
 }
