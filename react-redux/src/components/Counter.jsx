@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 
 function Counter() {
   const [count, setCount] = useState();
+  const [choice, setChoice] = useState();
+
   useEffect(() => {
     setCount(0);
   }, []);
@@ -11,7 +13,15 @@ function Counter() {
   };
 
   const addCount = () => {
-    setCount(count + 10);
+    setCount(count + 1);
+  };
+
+  const resetCount = () => {
+    setCount(0);
+  };
+
+  const updateCount = () => {
+    setCount(choice);
   };
 
   return (
@@ -19,6 +29,13 @@ function Counter() {
       <button onClick={minusCount}>-</button>
       <h2>Count: {count}</h2>
       <button onClick={addCount}>+</button>
+      <button onClick={resetCount}>RESET</button>
+      <input
+        type="text"
+        value={choice}
+        onChange={(e) => setChoice(e.target.value)}
+      />
+      <button onClick={updateCount}>SUBMIT</button>
     </div>
   );
 }
